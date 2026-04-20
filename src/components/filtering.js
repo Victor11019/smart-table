@@ -13,17 +13,20 @@ export function initFiltering(elements) {
 
     const applyFiltering = (query, state, action) => {
         // @todo: #4.2 — обработать очистку поля
-        if(action && action.name === 'clear') {
-            let par = document.querySelectorAll(".filter-wrapper");
-            let dau = par.children[0];
-
-            if(dau) {
-                dau.value = "";
-                let filNam = button.dataset.field;
-                state[filNam] = "";
+    if (action && action.name === 'clear') {    
+        const button = action.element;
+        const parent = button.closest('.filter-wrapper');
+            if (parent) {
+                const input = parent.querySelector('input');
+            if (input) {
+                input.value = ''; 
+                const fieldName = button.dataset.field;
+            if (fieldName) {
+                state[fieldName] = '';
             }
         }
-
+    }
+}
         // @todo: #4.5 — отфильтровать данные используя компаратор
         const filter = {};
         Object.keys(elements).forEach(key => {
